@@ -183,7 +183,7 @@ module.exports.getDonation = async (event, context) => {
   body.e1 = info;
   body.err = "this is a debug message";
 
-
+/*
   var params = {
     Key: {
      "donationId": {
@@ -192,7 +192,7 @@ module.exports.getDonation = async (event, context) => {
     }, 
     TableName: "Donations"
    };
-
+*/
 /*
   try {
   dynamoDb.getItem(params, function(err, data) {
