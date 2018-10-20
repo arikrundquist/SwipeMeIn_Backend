@@ -179,7 +179,7 @@ module.exports.getDonation = async (event, context) => {
 
   alert("here");
   alert(info);
-
+/*
   var params = {
     Key: {
      "donationId": {
@@ -196,6 +196,6 @@ module.exports.getDonation = async (event, context) => {
       alert(data);
     }
   });
-
+*/
   return "";
 };
