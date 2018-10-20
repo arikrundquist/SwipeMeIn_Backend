@@ -42,3 +42,17 @@ functions:
           method: POST
           path: /dbTest
           private: false
+  postSwipe:
+    handler: arik_handler.postSwipe
+    events:
+      - http:
+        method: POST
+        path: /postSwipe
+        private: false
+  postDonation:
+    handler: arik_handler.postDonation
+    events:
+      - http:
+        method: POST
+        path: /postDonation
+        private: false
