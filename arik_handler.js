@@ -197,5 +197,5 @@ module.exports.getDonation = async (event, context) => {
     }
   });
 
-  return response;
+  return "";
 };
