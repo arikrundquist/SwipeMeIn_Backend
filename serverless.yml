@@ -17,10 +17,10 @@ functions:
           method: POST
           path: /messages
           private: false
-  test2:
-    handler: handler.hello
+  testarik:
+    handler: arik_handler.thisIsATest
     events:
       - http:
           method: GET
-          path: /messages
+          path: /messages/{var1}/{var2}
           private: false
