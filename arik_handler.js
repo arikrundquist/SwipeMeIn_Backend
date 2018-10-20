@@ -9,7 +9,7 @@ module.exports.hello = async (event, context) => {
     }),
   };
 
-  module.exports.thisIsATest = async(event, context, var1, var2) => {
+  module.exports.thisIsATest = async(event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
