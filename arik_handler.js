@@ -13,7 +13,7 @@ module.exports.hello = async (event, context) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: 'I wonder if this will work... var1 = ' + var1 + ' and var2 = ' + var2,
+        message: 'I wonder if this will work...',
         input: event,
       }),
     };
