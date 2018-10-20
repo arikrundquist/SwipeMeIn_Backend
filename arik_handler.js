@@ -164,7 +164,7 @@ module.exports.postDonation = async (event, context) => {
 
 
 module.exports.getDonation = async (event, context) => {
-  const response = {
+  const info = {
     statusCode: 200,
     body: JSON.stringify({
       message: 'createChatMessage',
@@ -175,5 +175,21 @@ module.exports.getDonation = async (event, context) => {
       body: event.body
     })
   };
+
+  var params = {
+    Key: {
+     "donationId": {
+       S: info["params"]["donationId"]
+      }
+    }, 
+    TableName: "Donations"
+   };
+
+  var response = {
+    donationId: "", swiperId: "", schoolId: "", amount: ""
+  };
+
+  dynamoDb.getItem();
+
   return response;
 };
