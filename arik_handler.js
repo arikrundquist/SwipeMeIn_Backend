@@ -195,5 +195,5 @@ module.exports.getDonation = async (event, context) => {
   });
 */
 
-  return {thisWillProbablyNotWork: "but it might"}};
+  return {statusCode: 200, body: "but it might"}};
 };
