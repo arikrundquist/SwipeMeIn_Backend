@@ -193,5 +193,7 @@ module.exports.getDonation = async (event, context) => {
     }
   });
 */
+
+  alert(info);
   return info;
 };
