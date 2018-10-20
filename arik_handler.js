@@ -161,3 +161,18 @@ module.exports.postDonation = async (event, context) => {
     });
   });
 };
+
+
+module.exports.getDonation = async (event, context) => {
+  let _parsed;
+  try {
+    _parsed = JSON.parse(event.body);
+  } catch (err) {
+    console.error(`Could not parse requested JSON ${event.body}: ${err.stack}`);
+    return {
+      statusCode: 500,
+      error: `Could not parse requested JSON: ${err.stack}`
+    };
+  }
+  alert(_parsed);
+};

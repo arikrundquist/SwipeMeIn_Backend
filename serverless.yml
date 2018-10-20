@@ -56,3 +56,10 @@ functions:
           method: POST
           path: /postDonation
           private: false
+  getDonation:
+    handler: arik_handler.getDonation
+    events:
+      - http:
+          method: GET
+          path: /getDonation/{donationId}
+          private: false
