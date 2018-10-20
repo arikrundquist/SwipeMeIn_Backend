@@ -14,6 +14,8 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
+      Resource:
+        - { "Fn::GetAtt": ["Swipes", "Arn" ] }
 
 
 functions:
