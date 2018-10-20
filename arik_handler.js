@@ -164,6 +164,7 @@ module.exports.postDonation = async (event, context) => {
 
 
 module.exports.getDonation = async (event, context) => {
+  alert("here");
   const info = {
     statusCode: 200,
     body: JSON.stringify({
