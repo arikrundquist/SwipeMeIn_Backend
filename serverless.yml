@@ -1,0 +1,26 @@
+service: 'SwipeMeIn'
+
+custom:
+  tableName: 'swipe-me-in-table-${self:provider.stage}'
+
+provider:
+  name: 'aws'
+  runtime: 'nodejs8.10'
+  stage: 'dev'
+  region: 'us-east-1'
+
+functions:
+  test:
+    handler: handler.hello
+    events:
+      - http: 
+          method: POST
+          path: /messages
+          private: false
+  test2:
+    handler: handler.hello
+    events:
+      - http:
+          method: GET
+          path: /messages
+          private: false
