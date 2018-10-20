@@ -193,6 +193,7 @@ module.exports.getDonation = async (event, context) => {
     TableName: "Donations"
    };
 
+/*
   try {
   dynamoDb.getItem(params, function(err, data) {
     body.msg = data;
@@ -201,7 +202,7 @@ module.exports.getDonation = async (event, context) => {
   }catch(e) {
     body.rip = e;
   }
-
+*/
 
   response.body = JSON.stringify(body);
   return response;
