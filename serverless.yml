@@ -1,13 +1,101 @@
 service: 'SwipeMeIn'
 
-custom:
-  tableName: 'swipe-me-in-table-${self:provider.stage}'
-
 provider:
   name: 'aws'
   runtime: 'nodejs8.10'
   stage: 'dev'
   region: 'us-east-1'
+
+resources:
+  Resources:
+    Swipes:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: swipeId
+            AttributeType: S
+          - AttributeName: swiperId
+            AttributeType: S
+          - AttributeName: swipeeId
+            AttributeType: S
+          - AttributeName: dateTime
+            AttributeType: S
+          - AttributeName: swipeLimit
+            AttributeType: S
+          - AttributeName: timeCreated
+            AttributeType: S
+          - AttributeName: isDonation
+            AttributeType: S
+          - AttributeName: swiperConfirmed
+            AttributeType: S
+          - AttributeName: swipeeConfirmed
+            AttributeType: S
+          - AttributeName: transactionCompleated
+            AttributeType: S
+        KeySchema:
+          - AttributeName: swipeId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: swiperIndex
+            KeySchema:
+              - AttributeName: swiperId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+          - IndexName: swipeeIndex
+            KeySchema:
+              - AttributeName: swipeeId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: Swipes
+    Donations:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: donationId
+            AttributeType: S
+          - AttributeName: swiperId
+            AttributeType: S
+          - AttributeName: schoolId
+            AttributeType: S
+          - AttributeName: amount
+            AttributeType: S
+        KeySchema:
+          - AttributeName: donationId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: swiperIndex
+            KeySchema:
+              - AttributeName: swiperId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+          - IndexName: schoolIndex
+            KeySchema:
+              - AttributeName: schoolId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: Donations
 
 functions:
   test:
