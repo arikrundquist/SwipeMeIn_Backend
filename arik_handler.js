@@ -195,5 +195,5 @@ module.exports.getDonation = async (event, context) => {
   });
 */
 
-  return "can I just do this?";
+  return "{\"can I just do this?\":\"probably not\"}";
 };
