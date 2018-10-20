@@ -175,6 +175,7 @@ module.exports.getDonation = async (event, context) => {
       body: event.body
     })
   };
+
 /*
   var params = {
     Key: {
@@ -194,6 +195,5 @@ module.exports.getDonation = async (event, context) => {
   });
 */
 
-  alert(info);
-  return info;
+  return "can I just do this?";
 };
