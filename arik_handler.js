@@ -39,13 +39,13 @@ module.exports.dbTestCreate = async (event, context) => {
         error: `Could not parse requested JSON: ${err.stack}`
       };
     }
-    const { swipeID, swiperID, dateTime, swipeLimit, timeCreated, isDonation, swiperConfirmed, customerId, customerIdsConfirmed, transactionCompleted  } = _parsed;
+    const { swipeId, swiperId, dateTime, swipeLimit, timeCreated, isDonation, swiperConfirmed, customerId, customerIdsConfirmed, transactionCompleted  } = _parsed;
 
     const params = {
       TableName: "Swipes",
       Item: {
         swipeId: swipeId,
-        swiperID: swiperID,
+        swiperId: swiperId,
         dateTime: dateTime,
         swipeLimit: swipeLimit,
         timeCreated: timeCreated,
