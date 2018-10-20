@@ -1,5 +1,27 @@
 service: 'SwipeMeIn'
 
+resources:
+  Resources:
+    Swipes:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: swipeId
+            AttributeType: N
+          - AttributeName: swiperId
+            AttributeType: N
+          - AttributeName: swipeeId
+            AttributeType: N
+          - AttributeType: dateTime
+            AttributeType: N
+        KeySchema:
+          - AttributeName: swipeId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: Swipes
+
 provider:
   name: 'aws'
   runtime: 'nodejs8.10'
