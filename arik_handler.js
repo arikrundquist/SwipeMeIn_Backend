@@ -164,7 +164,6 @@ module.exports.postDonation = async (event, context) => {
 
 
 module.exports.getDonation = async (event, context) => {
-  alert("here");
   const info = {
     statusCode: 200,
     body: JSON.stringify({
@@ -176,9 +175,6 @@ module.exports.getDonation = async (event, context) => {
       body: event.body
     })
   };
-
-  alert("here");
-  alert(info);
 /*
   var params = {
     Key: {
@@ -197,5 +193,5 @@ module.exports.getDonation = async (event, context) => {
     }
   });
 */
-  return "";
+  return info;
 };
