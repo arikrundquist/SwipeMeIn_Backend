@@ -164,6 +164,10 @@ module.exports.postDonation = async (event, context) => {
 
 
 module.exports.getDonation = async (event, context) => {
+  
+  var response = {statusCode: 200};
+  var body = {};
+  
   const info = {
     statusCode: 200,
     body: JSON.stringify({
@@ -175,6 +179,9 @@ module.exports.getDonation = async (event, context) => {
       body: event.body
     })
   };
+
+  body.e1 = info;
+  body.err = "this is a debug message";
 
 /*
   var params = {
@@ -195,5 +202,6 @@ module.exports.getDonation = async (event, context) => {
   });
 */
 
-  return {statusCode: 200, body: "but it might"};
+  response.body = JSON.stringify(body);
+  return response;
 };
