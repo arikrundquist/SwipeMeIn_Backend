@@ -22,5 +22,5 @@ functions:
     events:
       - http:
           method: GET
-          path: /messages/{var1}/{var2}
+          path: /messages
           private: false
