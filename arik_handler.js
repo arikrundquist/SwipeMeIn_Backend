@@ -185,11 +185,13 @@ module.exports.getDonation = async (event, context) => {
     TableName: "Donations"
    };
 
-  var response = {
-    donationId: "", swiperId: "", schoolId: "", amount: ""
-  };
-
-  dynamoDb.getItem();
+  dynamoDb.getItem(params, function(err, data) {
+    if(err) {
+      alert(err, err.stack);
+    }else {
+      alert(data);
+    }
+  });
 
   return response;
 };
