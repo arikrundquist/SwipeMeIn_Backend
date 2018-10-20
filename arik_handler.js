@@ -107,14 +107,14 @@ module.exports.postSwipe = async (event, context) => {
   return await new Promise((resolve, reject) => {
     dynamoDb.put(params, (error, data) => {
       if (error) {
-        console.log(`dbTestCreate ERROR=${error.stack}`);
+        console.log(`postSwipe ERROR=${error.stack}`);
         resolve({
           statusCode: 400,
-          error: `dbTestCreate: ${error.stack}`
+          error: `postSwipe: ${error.stack}`
         });
 
       } else {
-        console.log(`dbTestCreate data=${JSON.stringify(data)}`);
+        console.log(`postSwipe data=${JSON.stringify(data)}`);
         resolve({ statusCode: 200, body: JSON.stringify(params.Item) });
       }
     });
@@ -133,35 +133,29 @@ module.exports.postDonation = async (event, context) => {
       error: `Could not parse requested JSON: ${err.stack}`
     };
   }
-  const { swipeId, swiperId, dateTime, swipeLimit, timeCreated, isDonation, swiperConfirmed, customerId, customerIdsConfirmed, transactionCompleted } = _parsed;
+  const { donationId, swiperId, schoolId, amount } = _parsed;
 
   const params = {
     TableName: "Donations",
     Item: {
-      swipeId: swipeId,
+      donationId: donationId,
       swiperId: swiperId,
-      dateTime: dateTime,
-      swipeLimit: swipeLimit,
-      timeCreated: timeCreated,
-      isDonation: isDonation,
-      swiperConfirmed: swiperConfirmed,
-      customerId: customerId,
-      customerIdsConfirmed: customerIdsConfirmed,
-      transactionCompleted: transactionCompleted
+      schoolId: schoolId,
+      amount: amount
     },
   };
 
   return await new Promise((resolve, reject) => {
     dynamoDb.put(params, (error, data) => {
       if (error) {
-        console.log(`dbTestCreate ERROR=${error.stack}`);
+        console.log(`postDonation ERROR=${error.stack}`);
         resolve({
           statusCode: 400,
-          error: `dbTestCreate: ${error.stack}`
+          error: `postDonation: ${error.stack}`
         });
 
       } else {
-        console.log(`dbTestCreate data=${JSON.stringify(data)}`);
+        console.log(`postDonation data=${JSON.stringify(data)}`);
         resolve({ statusCode: 200, body: JSON.stringify(params.Item) });
       }
     });
