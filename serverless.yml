@@ -1,7 +1,7 @@
 service: 'SwipeMeIn'
 
 resources:
-  
+
 
 provider:
   name: 'aws'
@@ -17,15 +17,14 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource:
-        - { "Fn::GetAtt": ["Swipes", "Arn" ] }
+      Resource: "arn:aws:dynamodb:us-east-1:*:*"
 
 
 functions:
   test:
     handler: handler.hello
     events:
-      - http: 
+      - http:
           method: POST
           path: /messages
           private: false
@@ -35,4 +34,11 @@ functions:
       - http:
           method: GET
           path: /messages
+          private: false
+  dbTest:
+    handler: arik_handler.dbTestCreate
+    events:
+      - http:
+          method: POST
+          path: /dbTest
           private: false
