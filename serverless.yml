@@ -12,7 +12,7 @@ resources:
             AttributeType: N
           - AttributeName: swipeeId
             AttributeType: N
-          - AttributeType: dateTime
+          - AttributeName: dateTime
             AttributeType: N
         KeySchema:
           - AttributeName: swipeId
