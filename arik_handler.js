@@ -186,10 +186,10 @@ module.exports.getDonation = async (event, context) => {
   return await new Promise((resolve, reject) => {
     dynamoDb.get(params, function(err, data) {
       if (err) {
-        console.log(`getDonation ERROR=${error.stack}`);
+        console.log(`getDonation ERROR=${err.stack}`);
         resolve({
           statusCode: 400,
-          error: `Could not retrieve donation: ${error.stack}`
+          error: `Could not retrieve donation: ${err.stack}`
         });
       } else if (!data || typeof data === 'undefined' || !data.Item) {
         console.log(`getDonation did not find donationId=${event.queryStringParameters.donationId}`);
@@ -228,10 +228,10 @@ module.exports.getDonationBySchool = async (event, context) => {
   return await new Promise((resolve, reject) => {
     dynamoDb.get(params, function(err, data) {
       if (err) {
-        console.log(`getDonation ERROR=${error.stack}`);
+        console.log(`getDonation ERROR=${err.stack}`);
         resolve({
           statusCode: 400,
-          error: `Could not retrieve donation: ${error.stack}`
+          error: `Could not retrieve donation: ${err.stack}`
         });
       } else if (!data || typeof data === 'undefined' || !data.Item) {
         console.log(`getDonation did not find schoolId=${event.queryStringParameters.schoolId}`);
@@ -270,10 +270,10 @@ module.exports.getDonationBySwiper = async (event, context) => {
   return await new Promise((resolve, reject) => {
     dynamoDb.get(params, function(err, data) {
       if (err) {
-        console.log(`getDonation ERROR=${error.stack}`);
+        console.log(`getDonation ERROR=${err.stack}`);
         resolve({
           statusCode: 400,
-          error: `Could not retrieve donation: ${error.stack}`
+          error: `Could not retrieve donation: ${err.stack}`
         });
       } else if (!data || typeof data === 'undefined' || !data.Item) {
         console.log(`getDonation did not find swiperId=${event.queryStringParameters.donationId}`);
