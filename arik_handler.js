@@ -249,12 +249,12 @@ module.exports.getDonationBySchool = async (event, context) => {
 
 module.exports.getDonationBySwiper = async (event, context) => {
 
-  if (!("pathParameters" in event) || !(event.pathParameters)) {
+  /*if (!("pathParameters" in event) || !(event.pathParameters)) {
     return {
       statusCode: 404,
       error: `No pathParameters`
     };
-  }
+  }*/
   if (!(event.pathParameters.swiperId)) {
     return {
       statusCode: 404,
