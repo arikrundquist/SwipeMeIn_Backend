@@ -222,11 +222,11 @@ module.exports.getDonationBySchool = async (event, context) => {
 
   const params = {
     TableName: "Donations",
-    Key: { schoolId: event.queryStringParameters.schoolId }
+    //Key: { schoolId: event.queryStringParameters.schoolId }
   };
 
   return await new Promise((resolve, reject) => {
-    dynamoDb.query(params, function(err, data) {
+    dynamoDb.query(event, function(err, data) {
       if (err) {
         console.log(`getDonation ERROR=${err.stack}`);
         resolve({
