@@ -226,7 +226,7 @@ module.exports.getDonationBySchool = async (event, context) => {
   };
 
   return await new Promise((resolve, reject) => {
-    dynamoDb.get(params, function(err, data) {
+    dynamoDb.query(params, function(err, data) {
       if (err) {
         console.log(`getDonation ERROR=${err.stack}`);
         resolve({
