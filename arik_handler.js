@@ -249,41 +249,40 @@ module.exports.getDonationBySchool = async (event, context) => {
 
 module.exports.getDonationBySwiper = async (event, context) => {
 
-  if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
+  if (!("pathParameters" in event) || !(event.pathParameters)) {
     return {
       statusCode: 404,
-      error: `No Query String`
+      error: `No pathParameters`
     };
   }
-  if (!(event.queryStringParameters.swiperId)) {
+  if (!(event.pathParameters.swiperId)) {
     return {
       statusCode: 404,
-      error: `No swiperId in Query String: ${JSON.stringify(event.queryStringParameters)}`
+      error: `No swiperId in Query String: ${JSON.stringify(event.pathParameters)}`
     };
   }
 
   const params = {
     TableName: "Donations",
-    Key: { swiperId: event.queryStringParameters.swiperId }
+    IndexName: "swiperId-index",
+    KeyConditionExpression: "swiperId = :swiperId",
+    ExpressionAttributeValues: {
+        ":swiperId": event.pathParameters.swiperId
+    }
   };
 
   return await new Promise((resolve, reject) => {
-    dynamoDb.get(params, function(err, data) {
+    dynamoDb.query(params, function(err, data) {
       if (err) {
-        console.log(`getDonation ERROR=${err.stack}`);
+        console.log(`getDonationBySwiper ERROR=${error.stack}`);
         resolve({
           statusCode: 400,
-          error: `Could not retrieve donation: ${err.stack}`
+          error: `Could not query donations with swiper ${event.pathParameters.room}: ${error.stack}`
         });
-      } else if (!data || typeof data === 'undefined' || !data.Item) {
-        console.log(`getDonation did not find swiperId=${event.queryStringParameters.donationId}`);
-        resolve({
-          statusCode: 404,
-          error: `Could not find donation for swiperId: ${event.queryStringParameters.donationId}`
-        });
-      } else {
-        console.log(`getDonationBySwiperId data=${JSON.stringify(data.Item)}`);
-        resolve({ statusCode: 200, body: JSON.stringify(data.Item) });
+      }
+      else {
+        console.log(`getDonationBySwiper data=${JSON.stringify(data.Items)}`);
+        resolve({ statusCode: 200, body: JSON.stringify(data.Items) });
       }
     });
   });
