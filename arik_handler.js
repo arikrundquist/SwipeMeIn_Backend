@@ -183,7 +183,7 @@ module.exports.getDonation = async (event, context) => {
   //body.e1 = info;
   //body.err = "this is a debug message";
 
-  body.test = info.body.params;
+  body.test = info.body;
 
 /*
   var params = {
