@@ -207,7 +207,7 @@ module.exports.getDonation = async (event, context) => {
 
 module.exports.getDonationBySchool = async (event, context) => {
 
-  if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
+  /*if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
     return {
       statusCode: 404,
       error: `No Query String`
@@ -218,7 +218,7 @@ module.exports.getDonationBySchool = async (event, context) => {
       statusCode: 404,
       error: `No schoolId in Query String: ${JSON.stringify(event.queryStringParameters)}`
     };
-  }
+  }*/
 
   const params = {
     TableName: "Donations",
