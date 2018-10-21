@@ -61,5 +61,5 @@ functions:
     events:
       - http:
           method: GET
-          path: /getDonation/{donationId}
+          path: /getDonation/
           private: false

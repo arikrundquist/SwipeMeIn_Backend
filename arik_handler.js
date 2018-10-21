@@ -164,48 +164,43 @@ module.exports.postDonation = async (event, context) => {
 
 
 module.exports.getDonation = async (event, context) => {
-  
-  var response = {statusCode: 200};
-  var body = {};
-  
-  const info = {
-    statusCode: 200,
-    body: JSON.stringify({
-      message: 'createChatMessage',
-      method: event.httpMethod,
-      path: event.path,
-      query: event.queryStringParameters,
-      params: event.pathParameters,
-      body: event.body
-    })
+
+  if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
+    return {
+      statusCode: 404,
+      error: `No Query String`
+    };
+  }
+  if (!(event.queryStringParameters.donationId)) {
+    return {
+      statusCode: 404,
+      error: `No donationId in Query String: ${JSON.stringify(event.queryStringParameters)}`
+    };
+  }
+
+  const params = {
+    TableName: "Donations",
+    Key: { donationId: event.queryStringParameters.donationId }
   };
 
-  //body.e1 = info;
-  //body.err = "this is a debug message";
-
-  body.test = info.body.params;
-
-/*
-  var params = {
-    Key: {
-     "donationId": {
-       S: info["params"]["donationId"]
+  return await new Promise((resolve, reject) => {
+    dynamoDb.get(params, function(err, data) {
+      if (err) {
+        console.log(`getDonation ERROR=${error.stack}`);
+        resolve({
+          statusCode: 400,
+          error: `Could not retrieve donation: ${error.stack}`
+        });
+      } else if (!data || typeof data === 'undefined' || !data.Item) {
+        console.log(`getDonation did not find donationId=${event.queryStringParameters.donationId}`);
+        resolve({
+          statusCode: 404,
+          error: `Could not find donation for donationId: ${event.queryStringParameters.donationId}`
+        });
+      } else {
+        console.log(`getMessage data=${JSON.stringify(data.Item)}`);
+        resolve({ statusCode: 200, body: JSON.stringify(data.Item) });
       }
-    }, 
-    TableName: "Donations"
-   };
-*/
-/*
-  try {
-  dynamoDb.getItem(params, function(err, data) {
-    body.msg = data;
-    body.error = err;
+    });
   });
-  }catch(e) {
-    body.rip = e;
-  }
-*/
-
-  response.body = JSON.stringify(body);
-  return response;
 };
