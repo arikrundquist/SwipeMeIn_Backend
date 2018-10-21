@@ -63,3 +63,17 @@ functions:
           method: GET
           path: /getDonation
           private: false
+  getDonationBySwiper:
+    handler: arik_handler.getDonationBySwiper
+    events:
+      - http:
+          method: GET
+          path: /getDonationBySwiper
+          private: false
+  getDonationBySchool:
+    handler: arik_handler.getDonationBySchool
+    events:
+      - http:
+          method: GET
+          path: /getDonationBySchool
+          private: false

@@ -198,7 +198,91 @@ module.exports.getDonation = async (event, context) => {
           error: `Could not find donation for donationId: ${event.queryStringParameters.donationId}`
         });
       } else {
-        console.log(`getMessage data=${JSON.stringify(data.Item)}`);
+        console.log(`getDonation data=${JSON.stringify(data.Item)}`);
+        resolve({ statusCode: 200, body: JSON.stringify(data.Item) });
+      }
+    });
+  });
+};
+
+module.exports.getDonationBySchool = async (event, context) => {
+
+  if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
+    return {
+      statusCode: 404,
+      error: `No Query String`
+    };
+  }
+  if (!(event.queryStringParameters.schoolId)) {
+    return {
+      statusCode: 404,
+      error: `No schoolId in Query String: ${JSON.stringify(event.queryStringParameters)}`
+    };
+  }
+
+  const params = {
+    TableName: "Donations",
+    Key: { schoolId: event.queryStringParameters.schoolId }
+  };
+
+  return await new Promise((resolve, reject) => {
+    dynamoDb.get(params, function(err, data) {
+      if (err) {
+        console.log(`getDonation ERROR=${error.stack}`);
+        resolve({
+          statusCode: 400,
+          error: `Could not retrieve donation: ${error.stack}`
+        });
+      } else if (!data || typeof data === 'undefined' || !data.Item) {
+        console.log(`getDonation did not find schoolId=${event.queryStringParameters.schoolId}`);
+        resolve({
+          statusCode: 404,
+          error: `Could not find donation for schoolId: ${event.queryStringParameters.schoolId}`
+        });
+      } else {
+        console.log(`getDonationBySchool data=${JSON.stringify(data.Item)}`);
+        resolve({ statusCode: 200, body: JSON.stringify(data.Item) });
+      }
+    });
+  });
+};
+
+module.exports.getDonationBySwiper = async (event, context) => {
+
+  if (!("queryStringParameters" in event) || !(event.queryStringParameters)) {
+    return {
+      statusCode: 404,
+      error: `No Query String`
+    };
+  }
+  if (!(event.queryStringParameters.swiperId)) {
+    return {
+      statusCode: 404,
+      error: `No swiperId in Query String: ${JSON.stringify(event.queryStringParameters)}`
+    };
+  }
+
+  const params = {
+    TableName: "Donations",
+    Key: { swiperId: event.queryStringParameters.swiperId }
+  };
+
+  return await new Promise((resolve, reject) => {
+    dynamoDb.get(params, function(err, data) {
+      if (err) {
+        console.log(`getDonation ERROR=${error.stack}`);
+        resolve({
+          statusCode: 400,
+          error: `Could not retrieve donation: ${error.stack}`
+        });
+      } else if (!data || typeof data === 'undefined' || !data.Item) {
+        console.log(`getDonation did not find swiperId=${event.queryStringParameters.donationId}`);
+        resolve({
+          statusCode: 404,
+          error: `Could not find donation for swiperId: ${event.queryStringParameters.donationId}`
+        });
+      } else {
+        console.log(`getDonationBySwiperId data=${JSON.stringify(data.Item)}`);
         resolve({ statusCode: 200, body: JSON.stringify(data.Item) });
       }
     });
